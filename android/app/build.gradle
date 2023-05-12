@@ -1,6 +1,8 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+
+
 import com.android.build.OutputFile
 
 /**
@@ -77,6 +79,13 @@ def enableProguardInReleaseBuilds = false
  * this variant is about 6MiB larger per architecture than default.
  */
 def jscFlavor = 'org.webkit:android-jsc:+'
+
+//for vector-icons
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle";
+
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialCommunityIcons.ttf' ]
+]
 
 /**
  * Private function to get the list of Native Architectures you want to build.

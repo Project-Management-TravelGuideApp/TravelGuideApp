@@ -1,7 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image,TouchableOpacity } from 'react-native';
+import styles from './FirstPage.styles';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Button from '../../../components/Button';
 
-const FirstPage = () => {
+const FirstPage = ({navigation}) => {
     return (
       <View style={styles.container}>
       <Image
