@@ -6,11 +6,14 @@ import Button from '../../../components/Button';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import auth from '@react-native-firebase/auth';
 import firebase from '@react-native-firebase/firestore';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 
 const FirstPage = ({navigation}) => {
   //for google sign in
   const [userGoogleData, setUserGoogleData] = useState({});
+  //for facebook sign in
+  const [userFacbookData, setUserFacebookData] = useState({});
 
   //for firebase google-sign-in
   useEffect(() => {
@@ -35,12 +38,37 @@ const FirstPage = ({navigation}) => {
     profileImageSize: 120,
   });
 
+  //google-sign-in
   const googleSignIn = async () => {
     const {idToken} = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     navigation.navigate('HomePage');
     return auth().signInWithCredential(googleCredential);
   };
+
+  //facebook sign-in
+  const facebookLogin = async () => {
+    const result = await LoginManager.logInWithPermissions([
+      'public_profile',
+      'email',
+    ]);
+
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+    const data = await AccessToken.getCurrentAccessToken();
+
+    if (!data) {
+      throw 'Something went wrong obtaining access token';
+    }
+
+    const facebookCredential = auth.FacebookAuthProvider.credential(
+      data.accessToken,
+    );
+    navigation.navigate('HomePage');
+    return auth().signInWithCredential(facebookCredential);
+  };
+
 
   return (
     <View style={styles.container}>
@@ -65,7 +93,17 @@ const FirstPage = ({navigation}) => {
           <Text style={styles.google_text}>Google İle Oturum Aç</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.facebook}>
+        <TouchableOpacity 
+          style={styles.facebook}
+          onPress={() =>
+            facebookLogin()
+              .then(res => {
+                console.log(res);
+                setUserFacebookData(res.data);
+              })
+              .catch(error => console.log(error))
+          }
+        >
           <Icon name="facebook" size={40} />
           <Text style={styles.facebook_text}>Facebook İle Oturum Aç</Text>
         </TouchableOpacity>

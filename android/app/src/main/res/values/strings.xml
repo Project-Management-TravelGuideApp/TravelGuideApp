@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TravelGuideApp</string>
+
+    <!-- for facebook-login -->
+    <string name="facebook_app_id">552174526309838</string>
+    <string name="fb_login_protocol_scheme">fb552174526309838</string>
+    <string name="facebook_client_token">8cef67f3c5835e647c7d2641641c4405</string>
 </resources>
