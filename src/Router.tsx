@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 import FirstPage from './pages/auth/FirstPage';
 import Login from './pages/auth/Login';
 import HomePage from './pages/user/HomePage';
+import SignIn from './pages/auth/SignIn';
 
 const App = () =>{
   return(
@@ -17,6 +18,7 @@ const App = () =>{
         <Stack.Screen name="FirstPage" component={FirstPage} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="SignIn" component={SignIn} />
       </Stack.Navigator>
     </NavigationContainer>
   );
