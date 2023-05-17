@@ -11,7 +11,7 @@ export default StyleSheet.create({
         marginTop:10
     },
     header:{
-        fontFamily:'ZenDots-Regular',
+        fontFamily:'RopaSans-Regular',
         fontSize:30,
         alignSelf:'center',
         marginBottom:25,
